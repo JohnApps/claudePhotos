@@ -1,0 +1,58 @@
+Write Python app using streamlit to search and display all photos in a PG database 
+called photoschat, defined by PGDATABASE.
+
+The client is WINNIESACERPC, the server is MINI.
+
+The UI will run on WINNIESACERPC, the PG database is on MINI. Both machines are
+running Windows 11 and are connected via a 1Gbps ethernet link.
+
+No deprecated libraries are to be used, only the latest versions, e.g. psycopg3
+
+The environment is defined as follows:
+1. ROOT_DIR is H:\claude. All source code will be stored here
+2. SQL_DIR is ROOT_DIR\SQL
+3. DOCS_DIR is ROOT_DIR\DOCS
+4. PostgreSQL access is defined using the standard PG env variables:
+	PGDATABASE, PGHOST, PGUSER, PGPASSORD
+5. SOURCE_DIR is O:\Bilder and points to all photos in the database. Since the 
+photos table contains the path to the photos, there is no need to reference it
+
+All scripts are to have the prefix of cl_
+
+The tables in the PGDATABASE are:
+1. photo_faces which is to be used to find similar faces to those pasted into the UI
+2. photo_objects contains simple descriptions of objects found in the pathname column
+3. photos is the main table
+
+The pathname column in all 3 tables is the unique key and will never be changed
+
+The UI must offer the following functionality:
+- 3 photos displayed per row, the number of rows to be specifiable
+- the left hand side of the UI contains search input for
+-- pathname, aperture, shutter_sppeed, ISO, focal_length, camera_model,
+---  lens_model, created_at,  caption
+-- free text search of the analysis_tags (tsvector) column
+All input must be passed to the DB as ILIKE queries
+
+The photo_faces table will be used to search for faces similar to those input
+via paste or filename input by the user.
+
+The photos displayed must be enabled for full-screen display with the pathname
+displayed at the bottom of the photo.
+A 'close' button must be displayed in the UI in order to close the connection cleanly.
+
+Recommendations for a possible optimization of the database musg be provided, 
+should there be any.
+
+A requirements.txt must be generated.
+
+Versions:
+1. conda 26.1.1
+2. Python 3.14.3 | packaged by Anaconda, Inc.
+3. PostgreSQL 18.1
+4. Windows  10.0.26200 N/A Build 26200
+
+WINNIESACERPc has 4 cores and 32GB; MINI has 16 cores and 32GB
+
+
+Provision should be made for the use of GIT including a .gitirnore file

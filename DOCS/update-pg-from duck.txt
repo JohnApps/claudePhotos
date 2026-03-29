@@ -1,0 +1,32 @@
+
+
+attach 'host=mini dbname=photoschat user=postgres' as pg (type postgres);
+
+attach 'H:\qwen\photos.duckdb' as duck;
+
+update pg.photos set aperture = (select aperture from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set shutter_speed = (select shutter_speed from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set iso  = (select iso from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set focal_length  = (select focal_length from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set date_taken  = (select date_taken from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set camera_model  = (select camera_model from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set lens_model  = (select lens_model from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set lens_model  = (select lens_moidel from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
+
+update pg.photos set file_size  = (select file_size from  duck.photos where
+  pg.photos.pathname = duck.photos.pathname);
