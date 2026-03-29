@@ -265,6 +265,7 @@ def render_sidebar() -> tuple[dict, str | None, int, bytes | None, bytes | None]
 
         st.divider()
         tsquery = st.text_input("Full-text tag search (analysis_tags)")
+        st.caption("Comma = OR, Space = AND. E.g.: `beach, car` or `beach tree`")
 
         st.divider()
         num_rows = st.slider("Rows to display", 1, MAX_ROWS, DEFAULT_ROWS)
@@ -325,8 +326,22 @@ def build_full_query(filters: dict, tsquery: str | None,
         params.append(date_to)
 
     if tsquery:
-        clauses.append("analysis_tags @@ plainto_tsquery('simple', %s)")
-        params.append(tsquery)
+        # Parse user input: comma = OR, space = AND
+        # E.g., "beach, car" → "beach | car"
+        # E.g., "beach tree" → "beach & tree"
+        # E.g., "beach tree, car person" → "(beach & tree) | (car & person)"
+        or_groups = [g.strip() for g in tsquery.split(",") if g.strip()]
+        tsquery_parts = []
+        for group in or_groups:
+            terms = [t.strip() for t in group.split() if t.strip()]
+            if terms:
+                # Join terms within a group with AND
+                tsquery_parts.append(" & ".join(terms))
+        if tsquery_parts:
+            # Join groups with OR
+            final_tsquery = " | ".join(f"({p})" if " & " in p else p for p in tsquery_parts)
+            clauses.append("analysis_tags @@ to_tsquery('simple', %s)")
+            params.append(final_tsquery)
 
     where = (" WHERE " + " AND ".join(clauses)) if clauses else ""
     sql = f"""
