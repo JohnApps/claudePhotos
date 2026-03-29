@@ -4,6 +4,12 @@
 
 PhotosChat Browser is a Streamlit-based photo management and search application that connects to a PostgreSQL 18 database (`photoschat`). It supports rich photo discovery through metadata filtering, full-text search, and AI-powered similarity search using CLIP and InsightFace embeddings.
 
+## Repository
+
+```bash
+git remote add origin https://github.com/JohnApps/claudePhotos.git
+```
+
 ## Operating Environment
 
 **Platform:** Windows 11 (exclusively)
