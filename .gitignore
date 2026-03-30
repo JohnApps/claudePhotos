@@ -39,3 +39,5 @@ Desktop.ini
 
 # Databases
 photoschat.duckdb
+*.db
+*.duckdb

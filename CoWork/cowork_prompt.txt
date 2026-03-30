@@ -1,0 +1,21 @@
+I've analyzed my downloads folder (S:\downloads) and found:
+
+- 7803 total files
+- 77.47 GB total size
+
+Category breakdown:
+- Other: 3621 files (41.92 GB)
+- Installers: 595 files (27.51 GB)
+- Archives: 132 files (6.47 GB)
+- Documents: 1410 files (874.58 MB)
+- Videos: 11 files (375.70 MB)
+- Images: 245 files (304.83 MB)
+- Code: 1763 files (41.94 MB)
+- Audio: 17 files (11.18 MB)
+- Data: 9 files (3.39 MB)
+
+Please help me:
+1. Review the largest files and suggest which to delete
+2. Identify old files (>1 year) that might be obsolete
+3. Suggest a better organization structure
+4. Clean up duplicate files safely
